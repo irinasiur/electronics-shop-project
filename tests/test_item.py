@@ -1,9 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from src.item import Item
 
-if __name__ == '__main__':
-    item1 = Item('bag', 900, 10)
-
 
     # TastCase #1 Calculate_Total_Price
 def test_calculate_total_price():
