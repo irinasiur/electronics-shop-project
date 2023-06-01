@@ -40,14 +40,23 @@ class Item:
 
     @staticmethod
     def string_to_number(str):
+        """
+        Cтатический метод, возвращающий число из числа-строки.
+        """
         return int(float(str))
 
     @property
     def name(self):
+        """
+        Геттер
+        """
         return self.__name
 
     @name.setter
     def name(self, a):
+        """
+        Сеттер проверяет, что длина наименования товара не больше 10 симвовов.
+        """
         if len(a) <= 10:
             self.__name = a
         else:
