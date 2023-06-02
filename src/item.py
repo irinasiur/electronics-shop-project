@@ -1,3 +1,7 @@
+import csv
+import os.path
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -13,12 +17,50 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
-        self.all.append(self)
+        Item.all.append(self)
 
+    @classmethod
+    def instantiate_from_csv(cls):
+        """
+        Инициализирует экземпляры класса `Item` данными из файла _src/items.csv.
 
+        """
+        cls.all.clear()
+        filename = '/home/irinka/PycharmProjects/electronics-shop-project/src/items.csv'
+        try:
+            with open(filename, 'r', newline='', encoding='windows-1251') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    cls(row['name'], row['price'], row['quantity'])
+        except FileNotFoundError:
+            print('Файл не найден')
+
+    @staticmethod
+    def string_to_number(str):
+        """
+        Cтатический метод, возвращающий число из числа-строки.
+        """
+        return int(float(str))
+
+    @property
+    def name(self):
+        """
+        Геттер
+        """
+        return self.__name
+
+    @name.setter
+    def name(self, a):
+        """
+        Сеттер проверяет, что длина наименования товара не больше 10 симвовов.
+        """
+        if len(a) <= 10:
+            self.__name = a
+        else:
+            print('Длина наименования товара превышает 10 символов')
 
     def calculate_total_price(self) -> float:
         """
@@ -33,4 +75,3 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price * Item.pay_rate
-
