@@ -20,7 +20,7 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
-        #Item.all.append(self)
+        Item.all.append(self)
 
     @classmethod
     def instantiate_from_csv(cls):
@@ -34,7 +34,7 @@ class Item:
             with open(filename, 'r', newline='', encoding='windows-1251') as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
-                    Item.all.append(cls(row['name'], row['price'], row['quantity']))
+                    cls(row['name'], row['price'], row['quantity'])
         except FileNotFoundError:
             print('Файл не найден')
 
