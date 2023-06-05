@@ -75,3 +75,13 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price * Item.pay_rate
+
+    def __repr__(self):
+        # "Item('Смартфон', 10000, 20)"
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        """
+        Возвращает название товара.
+        """
+        return f"{self.__name}"

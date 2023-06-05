@@ -42,3 +42,13 @@ def test_name():
     item7.name = 'СуперСмартфон'
     assert item7.name == "ne_cat"
 
+
+def test_repr():
+    item8 = Item('cat', 100, 0)
+    assert repr(item8) == "Item('cat', 100, 0)"
+
+
+def test_str():
+    item9 = Item('cat', 100, 0)
+    assert str(item9) == "cat"
+
