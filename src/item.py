@@ -1,6 +1,5 @@
 import csv
-from phone import Phone
-import os.path
+#from src.phone import Phone
 
 
 class Item:
@@ -91,6 +90,7 @@ class Item:
         """
         Складывет экземпляры класса Phone и Item (количество товара в магазине).
         """
+        from src.phone import Phone
         if not issubclass(Phone, Item):
             return NotImplemented
         if not isinstance(other, Phone):

@@ -3,6 +3,7 @@ import sys
 from io import StringIO
 
 from src.item import Item
+from src.phone import Phone
 import pytest
 
 
@@ -51,4 +52,11 @@ def test_repr():
 def test_str():
     item9 = Item('cat', 100, 0)
     assert str(item9) == "cat"
+
+
+def test_add():
+    item4 = Item("Смартфон", 10000, 20)
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    assert item4 + phone1 == 25
+    assert phone1 + phone1 == 10
 
