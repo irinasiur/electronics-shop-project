@@ -1,5 +1,5 @@
 import csv
-import os.path
+#from src.phone import Phone
 
 
 class Item:
@@ -85,3 +85,14 @@ class Item:
         Возвращает название товара.
         """
         return f"{self.__name}"
+
+    def __add__(self, other):
+        """
+        Складывет экземпляры класса Phone и Item (количество товара в магазине).
+        """
+        from src.phone import Phone
+        if not issubclass(Phone, Item):
+            return NotImplemented
+        if not isinstance(other, Phone):
+            return NotImplemented
+        return int(self.quantity) + int(other.quantity)
