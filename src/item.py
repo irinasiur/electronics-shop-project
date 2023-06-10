@@ -1,5 +1,7 @@
 import csv
-#from src.phone import Phone
+
+
+# from src.phone import Phone
 
 
 class Item:
@@ -17,6 +19,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
+        super().__init__()
         self.__name = name
         self.price = price
         self.quantity = quantity
@@ -96,3 +99,5 @@ class Item:
         if not isinstance(other, Phone):
             return NotImplemented
         return int(self.quantity) + int(other.quantity)
+
+
