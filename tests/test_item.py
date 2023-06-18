@@ -2,7 +2,7 @@
 import sys
 from io import StringIO
 
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 import pytest
 
@@ -28,6 +28,7 @@ def test_instantiate_from_csv():
     assert len(Item.all) == 5
     item1 = Item.all[0]
     assert item1.name == 'Смартфон'
+    Item.instantiate_from_csv()
 
 
 def test_string_to_number():
