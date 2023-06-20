@@ -1,7 +1,13 @@
 import csv
-
+import os
+from pathlib import Path
 
 # from src.phone import Phone
+
+
+class InstantiateCSVError(Exception):
+    """Класс исключения при повреждении файла item.csv"""
+    pass
 
 
 class Item:
@@ -33,13 +39,24 @@ class Item:
         """
         cls.all.clear()
         filename = '/home/irinka/PycharmProjects/electronics-shop-project/src/items.csv'
+        my_filename, file_extension = os.path.splitext(filename)
         try:
             with open(filename, 'r', newline='', encoding='windows-1251') as csvfile:
                 reader = csv.DictReader(csvfile)
+                header = reader.fieldnames
+                if len(header) != 3:
+                    raise InstantiateCSVError(f"{Path(my_filename).stem}{file_extension}")
                 for row in reader:
-                    cls(row['name'], row['price'], row['quantity'])
+                    if not all(row.values()):
+                        raise InstantiateCSVError(f"{Path(my_filename).stem}{file_extension}")
+                    else:
+                        cls(row['name'], row['price'], row['quantity'])
+
         except FileNotFoundError:
-            print('Файл не найден')
+            print(f"Отсутствует файл {Path(my_filename).stem}{file_extension}")
+        except InstantiateCSVError as e:
+            print(f"Файл {str(e)} поврежден")
+
 
     @staticmethod
     def string_to_number(str):
@@ -99,5 +116,3 @@ class Item:
         if not isinstance(other, Phone):
             return NotImplemented
         return int(self.quantity) + int(other.quantity)
-
-
